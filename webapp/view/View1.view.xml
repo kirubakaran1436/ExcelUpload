@@ -27,11 +27,18 @@
 					</f:snappedTitleOnMobile>
 					<f:content>
 						<OverflowToolbar>
-							<GenericTag text="Total Upload"
+							<GenericTag text="Success"
+								status="Success"
+								press="onGenericTagPress"
+								design="StatusIconHidden">
+								<ObjectNumber id="SuccessCount" number="0" emphasized="false" state="Error"/>
+							</GenericTag>
+
+							<GenericTag text="Error"
 								status="Error"
 								press="onGenericTagPress"
 								design="StatusIconHidden">
-								<ObjectNumber id="Total_Pending" text="1000" emphasized="false" state="Error"/>
+								<ObjectNumber id="ErrorCount" number="0" emphasized="false" state="Success"/>
 							</GenericTag>
 						</OverflowToolbar>
 					</f:content>
@@ -167,14 +174,14 @@
 						<t:Column width="11rem">
 							<Label text="Created On" />
 							<t:template>
-								<Text text="{JModel>CreatedAt}"/>
+								<Text text="{JModel>createdate}"/>
 							</t:template>
 						</t:Column>
 
 						<t:Column width="11rem">
 							<Label text="Created By" />
 							<t:template>
-								<Text text="{JModel>CreatedBy}"/>
+								<Text text="{JModel>createuser}"/>
 							</t:template>
 						</t:Column>
 						

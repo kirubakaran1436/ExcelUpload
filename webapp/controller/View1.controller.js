@@ -94,7 +94,8 @@ sap.ui.define([
                     });
                     this.getView().setModel(oJSONModel, "JModel");
                 
-                    var ValCount = 1;
+                    let SuccessCount = 0;
+                    let ErrorCount = 0;
                 
                     var today = new Date();
                     var dd = '' + today.getDate();
@@ -161,7 +162,7 @@ sap.ui.define([
                             success: function (oData, oResponse) {
                                 console.log("Success response:", oResponse);
                 
-                                that.JObj = { "refId": RefId, "Id": oData.PurchaseOrder, "Status": "Success", "Color":"Success" };
+                                that.JObj = { "refId": RefId, "Id": oData.PurchaseOrder,"createdate" :oData.CreationDate , "createuser":oData.CreatedByUser, "Status": "Success", "Color":"Success" };
                                 that.JArray.push(that.JObj);
                 
                                 var oJSONModel = new sap.ui.model.json.JSONModel({
@@ -170,6 +171,9 @@ sap.ui.define([
                                 that.getView().setModel(oJSONModel, "JModel");
                 
                                 oModel.refresh(true);
+                                let SUccessCount = that.getView().byId("SuccessCount").getNumber();
+                                that.getView().byId("SuccessCount").setNumber(parseInt(SUccessCount) + 1)
+
                                 resolve(oData);
                             },
                             error: function (error) {
@@ -181,6 +185,9 @@ sap.ui.define([
                                     data: that.JArray
                                 });
                                 that.getView().setModel(oJSONModel, "JModel");
+
+                                let ERorrCount = that.getView().byId("ErrorCount").getNumber();
+                                that.getView().byId("ErrorCount").setNumber(parseInt(ERorrCount) + 1)
                 
                                 oModel.refresh(true);
                                 resolve("oData");
