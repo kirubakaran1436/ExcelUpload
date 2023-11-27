@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: excelupload
+type: application
+framework:
+  name: SAPUI5
+  version: 1.120.0
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.f
+    - name: sap.suite.ui.generic.template
+    - name: sap.ui.comp
+    - name: sap.ui.generic.app
+    - name: sap.ui.table
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path:
+            url:
+            client:
+          - path: /sap/opu/odata/sap/YY1_GENERAL_PURCHASE_CDS/
+            url: https://my401677.s4hana.cloud.sap
+            destination: CTPL_my401677
+          - path: /sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/
+            url: https://my401677.s4hana.cloud.sap
+            destination: CTPL_my401677
+          - path: /sap/opu/odata/sap/YY1_SUPPLIER_CDS/
+            url: https://my401677.s4hana.cloud.sap
+            destination: CTPL_my401677
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: excelupload
+        ui5Theme: sap_horizon
