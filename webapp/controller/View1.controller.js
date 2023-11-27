@@ -29,14 +29,6 @@ sap.ui.define([
                 },
         
                 _onRouteMatched: function(oEvent){
-
-                    // ================================
-                    this.getOwnerComponent().getModel().read("/YY1_GENERAL_PURCHASE/$count", { /* Decalure Globally in the Create table Serial Number */
-                        success: $.proxy(function (oEvent, oResponse) {
-                        let Count = Number(oResponse.body); // This should be a number, no need to use Number()
-                        this.getView().byId("DocId").setValue(Count);        
-                            }, this)
-                        }); 
                   
                   if (!this.oFilterFrag)
                   this.oFilterFrag = sap.ui.xmlfragment("excelupload.view.upload", this);
