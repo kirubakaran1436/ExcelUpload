@@ -37,19 +37,6 @@ sap.ui.define([
                         this.getView().byId("DocId").setValue(Count);        
                             }, this)
                         }); 
-                    // ================================
-                    console.log("-----------------------------------------------------------")
-
-                    var ODataModel = this.getView().getModel("API_PURCHASEORDER_PROCESS_SRV");
-
-                        ODataModel.read("/A_PurchaseOrder", {
-                            success : function(OData){
-                                console.log(OData);
-                            }
-                        });
-
-                console.log("-----------------------------------------------------------")
-                    // ================================
                   
                   if (!this.oFilterFrag)
                   this.oFilterFrag = sap.ui.xmlfragment("excelupload.view.upload", this);
